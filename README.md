@@ -7,7 +7,7 @@ Personal photography portfolio. Plain HTML/CSS, no frameworks, no build tools.
 ```
 ceci-ivanov-site/
 ├── index.html        ← the whole site
-├── photos/           ← drop your photos here
+├── zine/             ← drop your photos here
 │   ├── hero.jpg      ← home page photo
 │   ├── digital-01.jpg
 │   ├── digital-02.jpg
@@ -26,7 +26,7 @@ Replace any placeholder block in index.html:
 
 <!-- after -->
 <div class="photo-wrap">
-  <img src="photos/digital-01.jpg" alt="">
+  <img src="zine/digital-01.jpg" alt="">
 </div>
 ```
 
