@@ -149,9 +149,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
 let lbPhotos = [];
 let lbIndex = 0;
+let scrollY = 0;
 
 function openLightbox(src, caption) {
   const activePage = document.querySelector('.page.active').id;
+  
+  // Store scroll position
+  scrollY = window.scrollY;
   
   if (activePage === 'thoughts' || activePage === 'about' || activePage === 'home') {
     // Simple single-photo lightbox for non-carousel pages
@@ -167,6 +171,9 @@ function openLightbox(src, caption) {
   setLbPhoto(lbPhotos[lbIndex].src, lbPhotos[lbIndex].caption);
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.width = '100%';
   updateLbArrows();
 }
 
@@ -238,6 +245,10 @@ function closeLightbox(e) {
   setTimeout(() => {
     document.getElementById('lightbox').classList.remove('open');
     document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, scrollY);
   }, 10);
 }
 
@@ -256,15 +267,29 @@ document.addEventListener('keydown', e => {
 let touchStartX = 0;
 let touchEndX = 0;
 let touchStartY = 0;
+let touchStartDistance = 0;
+
+function getTouchDistance(e) {
+  if (e.touches.length < 2) return 0;
+  const touch1 = e.touches[0];
+  const touch2 = e.touches[1];
+  return Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+}
 
 document.addEventListener('touchstart', e => {
   touchStartX = e.changedTouches[0].screenX;
   touchStartY = e.changedTouches[0].screenY;
+  touchStartDistance = getTouchDistance(e);
 }, false);
 
 document.addEventListener('touchmove', e => {
   const lightboxOpen = document.getElementById('lightbox').classList.contains('open');
   const activePage = document.querySelector('.page.active').id;
+  
+  // Don't prevent scroll if user is pinch-zooming
+  if (e.touches.length > 1) {
+    return; // Multi-touch = zoom, allow it
+  }
   
   if (lightboxOpen || activePage === 'work' || activePage === 'film') {
     // Prevent default scroll when swiping horizontally
@@ -281,6 +306,12 @@ document.addEventListener('touchmove', e => {
 }, { passive: false });
 
 document.addEventListener('touchend', e => {
+  // Don't trigger swipe if it was a pinch zoom
+  if (touchStartDistance > 0) {
+    touchStartDistance = 0;
+    return;
+  }
+  
   touchEndX = e.changedTouches[0].screenX;
   handleSwipe();
 }, false);
