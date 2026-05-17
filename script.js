@@ -1,13 +1,6 @@
 let carousels = { work: 0, film: 0 };
 
 function carouselNav(section, direction) {
-  // Hide swipe hint on first interaction
-  const hint = document.getElementById(`${section}-hint`);
-  if (hint && !hint.classList.contains('hidden')) {
-    hint.classList.add('hidden');
-    localStorage.setItem(`${section}-hint-seen`, 'true');
-  }
-  
   const container = document.querySelector(`#${section} .carousel-container`);
   const slides = container.querySelectorAll('.carousel-slide');
   const total = slides.length;
@@ -18,6 +11,18 @@ function carouselNav(section, direction) {
   if (carousels[section] >= total) carousels[section] = total - 1;
   
   const newIndex = carousels[section];
+  
+  // Show/hide hint based on position
+  const hint = document.getElementById(`${section}-hint`);
+  if (hint) {
+    if (newIndex === 0) {
+      // Show hint when back on first photo
+      hint.classList.remove('hidden');
+    } else {
+      // Hide hint when navigating away from first photo
+      hint.classList.add('hidden');
+    }
+  }
   
   // Only animate if we actually changed slides
   if (oldIndex !== newIndex) {
@@ -95,6 +100,12 @@ function show(id) {
     // Then activate the correct slide
     slides[currentIndex].classList.add('active');
     updateArrowStates(id, slides.length);
+    
+    // Show swipe hint when entering the section
+    const hint = document.getElementById(`${id}-hint`);
+    if (hint) {
+      hint.classList.remove('hidden');
+    }
   }
   
   // Force animation retrigger for all pages
@@ -132,16 +143,6 @@ window.addEventListener('DOMContentLoaded', () => {
       // Initialize arrow states for home page
       updateArrowStates('work', 7);
       updateArrowStates('film', 7);
-    }
-    
-    // Hide swipe hints if already seen
-    if (localStorage.getItem('work-hint-seen')) {
-      const workHint = document.getElementById('work-hint');
-      if (workHint) workHint.classList.add('hidden');
-    }
-    if (localStorage.getItem('film-hint-seen')) {
-      const filmHint = document.getElementById('film-hint');
-      if (filmHint) filmHint.classList.add('hidden');
     }
   }, 50);
 });
@@ -303,6 +304,7 @@ function handleSwipe() {
   // Handle carousel swipe
   const activePage = document.querySelector('.page.active').id;
   if (activePage !== 'work' && activePage !== 'film') return;
+  
   const diff = touchStartX - touchEndX;
   if (Math.abs(diff) > 50) {
     diff > 0 ? carouselNav(activePage, 1) : carouselNav(activePage, -1);
