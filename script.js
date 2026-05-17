@@ -4,14 +4,47 @@ function carouselNav(section, direction) {
   const container = document.querySelector(`#${section} .carousel-container`);
   const slides = container.querySelectorAll('.carousel-slide');
   const total = slides.length;
+  const oldIndex = carousels[section];
   
   carousels[section] += direction;
   if (carousels[section] < 0) carousels[section] = 0;
   if (carousels[section] >= total) carousels[section] = total - 1;
   
-  slides.forEach((slide, idx) => {
-    slide.classList.toggle('active', idx === carousels[section]);
-  });
+  const newIndex = carousels[section];
+  
+  // Only animate if we actually changed slides
+  if (oldIndex !== newIndex) {
+    const oldSlide = slides[oldIndex];
+    const newSlide = slides[newIndex];
+    
+    // Remove old slide with directional animation
+    oldSlide.classList.remove('active');
+    if (direction > 0) {
+      oldSlide.classList.add('slide-out-left');
+    } else {
+      oldSlide.classList.add('slide-out-right');
+    }
+    
+    // Prepare new slide from opposite direction
+    if (direction > 0) {
+      newSlide.classList.add('slide-in-right');
+    } else {
+      newSlide.classList.add('slide-in-left');
+    }
+    
+    // Trigger reflow then activate new slide
+    void newSlide.offsetHeight;
+    
+    setTimeout(() => {
+      newSlide.classList.remove('slide-in-left', 'slide-in-right');
+      newSlide.classList.add('active');
+      
+      // Clean up old slide classes
+      setTimeout(() => {
+        oldSlide.classList.remove('slide-out-left', 'slide-out-right');
+      }, 400);
+    }, 10);
+  }
   
   updateArrowStates(section, total);
 }

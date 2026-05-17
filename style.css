@@ -28,8 +28,12 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 1.6rem 
 .carousel-wrap { position: relative; padding: 9rem 2.5rem 4rem; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; opacity: 0; animation: fadeUp 0.5s ease 0.1s forwards; }
 .carousel-title { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.28em; color: var(--text); font-weight: 400; text-transform: lowercase; margin-bottom: 5rem; align-self: flex-start; }
 .carousel-container { position: relative; width: 100%; max-width: 90vw; display: flex; align-items: flex-start; justify-content: center; min-height: 70vh; }
-.carousel-slide { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; display: flex; flex-direction: column; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
-.carousel-slide.active { opacity: 1; pointer-events: auto; }
+.carousel-slide { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; display: flex; flex-direction: column; align-items: center; opacity: 0; pointer-events: none; transition: transform 0.4s ease, opacity 0.4s ease; }
+.carousel-slide.active { opacity: 1; pointer-events: auto; transform: translateX(-50%); }
+.carousel-slide.slide-out-left { transform: translateX(-150%); opacity: 0; }
+.carousel-slide.slide-out-right { transform: translateX(50%); opacity: 0; }
+.carousel-slide.slide-in-left { transform: translateX(-150%); opacity: 0; }
+.carousel-slide.slide-in-right { transform: translateX(50%); opacity: 0; }
 .carousel-img { width: 100%; max-width: 680px; height: auto; display: block; filter: brightness(0.97) contrast(1.01); transition: filter 0.4s, opacity 0.3s; cursor: pointer; }
 .carousel-img:hover { filter: brightness(1) contrast(1.01); opacity: 0.92; }
 .carousel-img.portrait { max-width: 440px; }
