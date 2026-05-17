@@ -75,9 +75,14 @@ function show(id) {
     const container = document.querySelector(`#${id} .carousel-container`);
     const slides = container.querySelectorAll('.carousel-slide');
     const currentIndex = carousels[id];
-    slides.forEach((slide, idx) => {
-      slide.classList.toggle('active', idx === currentIndex);
+    
+    // Clean up all transition classes first
+    slides.forEach((slide) => {
+      slide.classList.remove('active', 'slide-out-left', 'slide-out-right', 'slide-in-left', 'slide-in-right');
     });
+    
+    // Then activate the correct slide
+    slides[currentIndex].classList.add('active');
     updateArrowStates(id, slides.length);
   }
   
@@ -144,8 +149,16 @@ function buildLbPhotos() {
 }
 
 function setLbPhoto(src, caption) {
-  document.getElementById('lb-img').src = src;
-  document.getElementById('lb-caption').textContent = caption;
+  const img = document.getElementById('lb-img');
+  const captionEl = document.getElementById('lb-caption');
+  
+  img.src = src;
+  
+  // Reset caption animation
+  captionEl.style.animation = 'none';
+  captionEl.textContent = caption;
+  void captionEl.offsetHeight; // Force reflow
+  captionEl.style.animation = '';
 }
 
 function lbNav(dir) {
