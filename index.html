@@ -41,9 +41,11 @@
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
   <span class="lb-close" onclick="closeLightbox()">close</span>
   <span class="lb-arrow lb-prev" id="lb-prev" onclick="event.stopPropagation(); lbNav(-1)">&#8592;</span>
-  <img id="lb-img" src="" alt="">
+  <div class="lb-content">
+    <img id="lb-img" src="" alt="">
+    <span class="lb-caption" id="lb-caption"></span>
+  </div>
   <span class="lb-arrow lb-next" id="lb-next" onclick="event.stopPropagation(); lbNav(1)">&#8594;</span>
-  <span class="lb-caption" id="lb-caption"></span>
 </div>
 
 <div id="home" class="page active">

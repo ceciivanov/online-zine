@@ -110,6 +110,10 @@ window.addEventListener('DOMContentLoaded', () => {
   const validPages = ['work', 'film', 'thoughts', 'about'];
   if (hash && validPages.includes(hash)) {
     show(hash);
+  } else {
+    // Initialize arrow states for home page
+    updateArrowStates('work', 7);
+    updateArrowStates('film', 7);
   }
 });
 
@@ -154,11 +158,17 @@ function setLbPhoto(src, caption) {
   
   img.src = src;
   
-  // Reset caption animation
+  // Reset caption completely
   captionEl.style.animation = 'none';
+  captionEl.style.opacity = '0';
   captionEl.textContent = caption;
-  void captionEl.offsetHeight; // Force reflow
+  
+  // Force reflow
+  void captionEl.offsetHeight;
+  
+  // Re-enable animation
   captionEl.style.animation = '';
+  captionEl.style.opacity = '';
 }
 
 function lbNav(dir) {
@@ -183,9 +193,14 @@ function closeLightbox(e) {
     carousels[activePage] = lbIndex;
     const container = document.querySelector(`#${activePage} .carousel-container`);
     const slides = container.querySelectorAll('.carousel-slide');
-    slides.forEach((slide, idx) => {
-      slide.classList.toggle('active', idx === lbIndex);
+    
+    // Clean up all transition classes first
+    slides.forEach((slide) => {
+      slide.classList.remove('active', 'slide-out-left', 'slide-out-right', 'slide-in-left', 'slide-in-right');
     });
+    
+    // Then activate the correct slide
+    slides[lbIndex].classList.add('active');
     updateArrowStates(activePage, slides.length);
   }
   
@@ -221,6 +236,9 @@ document.addEventListener('touchend', e => {
 }, false);
 
 function handleSwipe() {
+  // Don't handle swipes when lightbox is open
+  if (document.getElementById('lightbox').classList.contains('open')) return;
+  
   const activePage = document.querySelector('.page.active').id;
   if (activePage !== 'work' && activePage !== 'film') return;
   const diff = touchStartX - touchEndX;
@@ -230,5 +248,3 @@ function handleSwipe() {
 }
 
 document.querySelector('.nav-links').classList.add('hidden');
-updateArrowStates('work', 7);
-updateArrowStates('film', 7);

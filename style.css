@@ -49,6 +49,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 1.6rem 
 .carousel-arrow.disabled { opacity: 0.2; cursor: not-allowed; pointer-events: none; }
 .lightbox { display: none; position: fixed; inset: 0; z-index: 800; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(18px) brightness(0.45); -webkit-backdrop-filter: blur(18px) brightness(0.45); background: rgba(180,183,186,0.15); }
 .lightbox.open { display: flex; animation: lbIn 0.25s ease-out forwards; }
+.lb-content { display: flex; flex-direction: column; align-items: center; pointer-events: none; }
 .lightbox img { max-width: 90vw; max-height: 88vh; object-fit: contain; cursor: default; animation: imgIn 0.3s ease-out forwards; }
 @keyframes lbIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes imgIn { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
@@ -91,10 +92,10 @@ svg.icon { width: 1.2em; height: 1.2em; stroke: currentColor; fill: none; stroke
   .carousel-wrap { padding: 7rem 1rem 4rem; }
   .carousel-title { margin-bottom: 3rem; font-size: 0.65rem; }
   .carousel-container { max-width: 100%; min-height: 60vh; }
-  .carousel-img { width: 100%; max-width: 90vw; }
-  .carousel-img.portrait { max-width: 75vw; }
-  .carousel-caption { width: 90vw; max-width: 100%; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
-  .carousel-caption.portrait { width: 75vw; max-width: 75vw; }
+  .carousel-img { width: 100%; max-width: 95vw; }
+  .carousel-img.portrait { max-width: 85vw; }
+  .carousel-caption { width: 95vw; max-width: 100%; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
+  .carousel-caption.portrait { width: 85vw; max-width: 85vw; }
   .caption-text { font-size: 0.92rem; max-width: 100%; }
   .caption-right { align-items: flex-start; flex-direction: row; gap: 1rem; }
   .carousel-arrow { padding: 2rem 1.2rem; font-size: 0.95rem; opacity: 0.85; }
