@@ -106,15 +106,23 @@ function show(id) {
 
 // Load correct page on initial load/refresh based on URL hash
 window.addEventListener('DOMContentLoaded', () => {
-  const hash = window.location.hash.slice(1);
-  const validPages = ['work', 'film', 'thoughts', 'about'];
-  if (hash && validPages.includes(hash)) {
-    show(hash);
-  } else {
-    // Initialize arrow states for home page
-    updateArrowStates('work', 7);
-    updateArrowStates('film', 7);
-  }
+  // Clean up all carousel slides on initial load
+  document.querySelectorAll('.carousel-slide').forEach(slide => {
+    slide.classList.remove('slide-out-left', 'slide-out-right', 'slide-in-left', 'slide-in-right');
+  });
+  
+  // Small delay to ensure CSS is fully loaded (helps with external browser quirks)
+  setTimeout(() => {
+    const hash = window.location.hash.slice(1);
+    const validPages = ['work', 'film', 'thoughts', 'about'];
+    if (hash && validPages.includes(hash)) {
+      show(hash);
+    } else {
+      // Initialize arrow states for home page
+      updateArrowStates('work', 7);
+      updateArrowStates('film', 7);
+    }
+  }, 50);
 });
 
 let lbPhotos = [];
