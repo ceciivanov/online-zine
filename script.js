@@ -257,16 +257,15 @@ let touchEndX = 0;
 let touchStartY = 0;
 
 document.addEventListener('touchstart', e => {
-  const activePage = document.querySelector('.page.active').id;
-  if (activePage === 'work' || activePage === 'film') {
-    touchStartX = e.changedTouches[0].screenX;
-    touchStartY = e.changedTouches[0].screenY;
-  }
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
 }, false);
 
 document.addEventListener('touchmove', e => {
+  const lightboxOpen = document.getElementById('lightbox').classList.contains('open');
   const activePage = document.querySelector('.page.active').id;
-  if (activePage === 'work' || activePage === 'film') {
+  
+  if (lightboxOpen || activePage === 'work' || activePage === 'film') {
     // Prevent default scroll when swiping horizontally
     const touchCurrentX = e.changedTouches[0].screenX;
     const touchCurrentY = e.changedTouches[0].screenY;
@@ -286,9 +285,22 @@ document.addEventListener('touchend', e => {
 }, false);
 
 function handleSwipe() {
-  // Don't handle swipes when lightbox is open
-  if (document.getElementById('lightbox').classList.contains('open')) return;
+  const lightboxOpen = document.getElementById('lightbox').classList.contains('open');
   
+  // Handle lightbox swipe
+  if (lightboxOpen) {
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        lbNav(1); // Swipe left = next photo
+      } else {
+        lbNav(-1); // Swipe right = previous photo
+      }
+    }
+    return;
+  }
+  
+  // Handle carousel swipe
   const activePage = document.querySelector('.page.active').id;
   if (activePage !== 'work' && activePage !== 'film') return;
   const diff = touchStartX - touchEndX;
