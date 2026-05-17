@@ -28,7 +28,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 1.6rem 
 .carousel-wrap { position: relative; padding: 9rem 2.5rem 4rem; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; opacity: 0; animation: fadeUp 0.5s ease 0.1s forwards; }
 .carousel-title { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.28em; color: var(--text); font-weight: 400; text-transform: lowercase; margin-bottom: 5rem; align-self: flex-start; }
 .carousel-container { position: relative; width: 100%; max-width: 90vw; display: flex; align-items: flex-start; justify-content: center; min-height: 70vh; }
-.swipe-hint { position: absolute; bottom: -3rem; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.18em; color: var(--muted); text-align: center; opacity: 1; transition: opacity 0.4s; pointer-events: none; }
+.swipe-hint { position: absolute; bottom: -2.5rem; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.18em; color: var(--muted); text-align: center; opacity: 1; transition: opacity 0.4s; pointer-events: none; z-index: 5; }
 .swipe-hint.hidden { opacity: 0; }
 .carousel-slide { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; display: flex; flex-direction: column; align-items: center; opacity: 0; pointer-events: none; }
 .carousel-slide.active { opacity: 1; pointer-events: auto; transform: translateX(-50%); }
@@ -92,9 +92,10 @@ svg.icon { width: 1.2em; height: 1.2em; stroke: currentColor; fill: none; stroke
   .home-inner { margin-right: 0; align-items: center; width: 100%; padding: 0 1.4rem; }
   .home-photo { width: 72vw; }
   .home-nav { gap: 1.5rem; }
-  .carousel-wrap { padding: 7rem 1rem 4rem; }
+  .carousel-wrap { padding: 7rem 1rem 6rem; }
   .carousel-title { margin-bottom: 3rem; font-size: 0.65rem; }
   .carousel-container { max-width: 100%; min-height: 60vh; }
+  .swipe-hint { bottom: -2rem; font-size: 0.55rem; }
   .carousel-img { width: 100%; max-width: 95vw; }
   .carousel-img.portrait { max-width: 85vw; }
   .carousel-caption { width: 95vw; max-width: 100%; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
