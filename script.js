@@ -1,6 +1,13 @@
 let carousels = { work: 0, film: 0 };
 
 function carouselNav(section, direction) {
+  // Hide swipe hint on first interaction
+  const hint = document.getElementById(`${section}-hint`);
+  if (hint && !hint.classList.contains('hidden')) {
+    hint.classList.add('hidden');
+    localStorage.setItem(`${section}-hint-seen`, 'true');
+  }
+  
   const container = document.querySelector(`#${section} .carousel-container`);
   const slides = container.querySelectorAll('.carousel-slide');
   const total = slides.length;
@@ -16,6 +23,10 @@ function carouselNav(section, direction) {
   if (oldIndex !== newIndex) {
     const oldSlide = slides[oldIndex];
     const newSlide = slides[newIndex];
+    
+    // Add transitioning class for animations
+    oldSlide.classList.add('transitioning');
+    newSlide.classList.add('transitioning');
     
     // Remove old slide with directional animation
     oldSlide.classList.remove('active');
@@ -121,6 +132,16 @@ window.addEventListener('DOMContentLoaded', () => {
       // Initialize arrow states for home page
       updateArrowStates('work', 7);
       updateArrowStates('film', 7);
+    }
+    
+    // Hide swipe hints if already seen
+    if (localStorage.getItem('work-hint-seen')) {
+      const workHint = document.getElementById('work-hint');
+      if (workHint) workHint.classList.add('hidden');
+    }
+    if (localStorage.getItem('film-hint-seen')) {
+      const filmHint = document.getElementById('film-hint');
+      if (filmHint) filmHint.classList.add('hidden');
     }
   }, 50);
 });
@@ -233,10 +254,31 @@ document.addEventListener('keydown', e => {
 
 let touchStartX = 0;
 let touchEndX = 0;
+let touchStartY = 0;
 
 document.addEventListener('touchstart', e => {
-  touchStartX = e.changedTouches[0].screenX;
+  const activePage = document.querySelector('.page.active').id;
+  if (activePage === 'work' || activePage === 'film') {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }
 }, false);
+
+document.addEventListener('touchmove', e => {
+  const activePage = document.querySelector('.page.active').id;
+  if (activePage === 'work' || activePage === 'film') {
+    // Prevent default scroll when swiping horizontally
+    const touchCurrentX = e.changedTouches[0].screenX;
+    const touchCurrentY = e.changedTouches[0].screenY;
+    const diffX = Math.abs(touchCurrentX - touchStartX);
+    const diffY = Math.abs(touchCurrentY - touchStartY);
+    
+    // If horizontal swipe is more dominant than vertical, prevent scroll
+    if (diffX > diffY && diffX > 10) {
+      e.preventDefault();
+    }
+  }
+}, { passive: false });
 
 document.addEventListener('touchend', e => {
   touchEndX = e.changedTouches[0].screenX;
