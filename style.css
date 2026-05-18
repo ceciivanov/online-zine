@@ -81,7 +81,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 1.6rem 
 .meta-val { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.05em; color: var(--text); line-height: 2; }
 .meta-val a { color: var(--text); text-decoration: none; transition: color 0.3s; }
 .meta-val a:hover { color: var(--dark); }
-svg.icon { width: 1.2em; height: 1.2em; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+svg.icon { width: 1.2em; height: 1.2em; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; will-change: opacity; }
 .copyright { position: fixed; bottom: 1.5rem; right: 2.5rem; z-index: 100; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 600px) {
@@ -93,17 +93,17 @@ svg.icon { width: 1.2em; height: 1.2em; stroke: currentColor; fill: none; stroke
   .home-inner { margin-right: 0; align-items: center; width: 100%; padding: 0 1.4rem; }
   .home-photo { width: 72vw; }
   .home-nav { gap: 1.5rem; }
-  .carousel-wrap { padding: 7rem 1rem 6rem; }
-  .carousel-title { margin-bottom: 3rem; font-size: 0.65rem; }
-  .carousel-container { max-width: 100%; min-height: 60vh; }
-  .swipe-hint { margin-top: 1.5rem; font-size: 0.55rem; }
+  .carousel-wrap { padding: 5rem 1rem 3rem; }
+  .carousel-title { margin-bottom: 2rem; font-size: 0.65rem; }
+  .carousel-container { max-width: 100%; min-height: 50vh; }
+  .swipe-hint { margin-top: 1rem; font-size: 0.55rem; }
   .carousel-img { width: 100%; max-width: 95vw; }
   .carousel-img.portrait { max-width: 85vw; }
   .carousel-caption { width: 95vw; max-width: 100%; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
   .carousel-caption.portrait { width: 85vw; max-width: 85vw; }
   .caption-text { font-size: 0.92rem; max-width: 100%; }
   .caption-right { align-items: flex-start; flex-direction: row; gap: 1rem; }
-  .carousel-arrow { padding: 2.5rem 1.8rem; font-size: 1.2rem; opacity: 0.9; }
+  .carousel-arrow { padding: 2.5rem 1.8rem; font-size: 1.5rem; opacity: 0.95; }
   .thoughts-wrap { padding: 7rem 1.4rem 8rem; }
   .about-wrap { padding: 7rem 1.4rem 8rem; }
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
