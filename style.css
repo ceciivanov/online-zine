@@ -3,7 +3,8 @@
 html { background: var(--bg); color: var(--text); font-family: var(--serif); font-weight: 300; overflow-x: hidden; }
 body { background: var(--bg); min-height: 100vh; }
 body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 900; opacity: 0.025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 200px 200px; }
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 1.6rem 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 1.6rem 2.5rem; display: flex; justify-content: space-between; align-items: center; transition: transform 0.3s ease; }
+nav.nav-hidden { transform: translateY(-100%); }
 .nav-name { font-family: var(--mono); font-size: 0.62rem; font-weight: 300; letter-spacing: 0.14em; color: var(--muted); text-decoration: none; text-transform: lowercase; cursor: pointer; transition: color 0.3s; }
 .nav-name:hover { color: var(--dark); }
 .nav-links { display: flex; gap: 2.2rem; transition: opacity 0.3s; }

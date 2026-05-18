@@ -1,3 +1,20 @@
+// Smart navbar - hide on scroll down, show on scroll up
+let lastScrollTop = 0;
+const navbar = document.querySelector('nav');
+
+document.addEventListener('scroll', () => {
+  const currentScroll = window.scrollY;
+
+  if (currentScroll > lastScrollTop && currentScroll > 100) {
+    // Scrolling down (and not at top)
+    navbar.classList.add('nav-hidden');
+  } else {
+    // Scrolling up or near top
+    navbar.classList.remove('nav-hidden');
+  }
+  lastScrollTop = currentScroll;
+}, false);
+
 let carousels = { work: 0, film: 0 };
 
 function carouselNav(section, direction) {
