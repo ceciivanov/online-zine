@@ -17,7 +17,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 1.6rem 
 @keyframes pageFade { from { opacity: 0; } to { opacity: 1; } }
 .home-inner { margin-right: 8vw; display: flex; flex-direction: column; align-items: flex-start; }
 .home-photo-wrap { position: relative; cursor: pointer; }
-.home-photo { width: min(340px, 54vw); display: block; aspect-ratio: 3/4; object-fit: cover; transition: opacity 0.3s; }
+.home-photo { width: min(340px, 54vw); display: block; aspect-ratio: 3/4; object-fit: cover; transition: opacity 0.3s; background-color: var(--dim); }
 .home-photo-wrap:hover .home-photo { opacity: 0.88; }
 .home-photo-wrap::after { content: 'view'; position: absolute; bottom: 1rem; right: 1rem; font-family: var(--mono); font-size: 0.46rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.6); opacity: 0; transition: opacity 0.3s; }
 .home-photo-wrap:hover::after { opacity: 1; }
