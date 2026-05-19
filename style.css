@@ -95,6 +95,7 @@ svg.icon { width: 1.2em; height: 1.2em; stroke: currentColor; fill: none; stroke
   .carousel-wrap { padding: 5rem 1rem 3rem; }
   .carousel-title { margin-bottom: 2rem; font-size: 0.65rem; }
   .carousel-container { max-width: 100%; min-height: 60vh; overflow-x: hidden; overflow-y: visible; }
+  .carousel-nav { top: 50% !important; }
   .carousel-img { width: 100%; max-width: 95vw; }
   .carousel-img.portrait { max-width: 85vw; }
   .carousel-caption { width: 95vw; max-width: 100%; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
