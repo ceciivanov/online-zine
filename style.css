@@ -28,7 +28,7 @@ nav.nav-hidden { transform: translateY(-100%); }
 .home-nav a:hover { color: var(--dark); border-color: var(--muted); }
 .carousel-wrap { position: relative; padding: 9rem 2.5rem 4rem; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; opacity: 0; animation: fadeUp 0.5s ease 0.1s forwards; }
 .carousel-title { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.28em; color: var(--text); font-weight: 400; text-transform: lowercase; margin-bottom: 5rem; align-self: flex-start; }
-.carousel-container { position: relative; width: 100%; max-width: 90vw; display: flex; align-items: flex-start; justify-content: center; min-height: 70vh; overflow: visible; }
+.carousel-container { position: relative; width: 100%; max-width: 90vw; display: flex; align-items: flex-start; justify-content: center; min-height: 70vh; overflow-x: hidden; overflow-y: visible; }
 .carousel-slide { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; display: flex; flex-direction: column; align-items: center; opacity: 0; pointer-events: none; will-change: transform, opacity; }
 .carousel-slide.active { opacity: 1; pointer-events: auto; transform: translateX(-50%); }
 .carousel-slide.transitioning { transition: transform 0.4s ease, opacity 0.4s ease; }
@@ -45,7 +45,7 @@ nav.nav-hidden { transform: translateY(-100%); }
 .caption-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; flex-shrink: 0; }
 .caption-n { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.18em; color: var(--muted); }
 .caption-stock { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.14em; color: var(--muted); }
-.carousel-nav { position: absolute; top: 45%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; pointer-events: none; z-index: 10; }
+.carousel-nav { position: absolute; top: 35%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; pointer-events: none; z-index: 10; }
 .carousel-arrow { font-family: var(--mono); font-size: 1rem; letter-spacing: 0.15em; color: var(--text); cursor: pointer; transition: color 0.3s, opacity 0.3s; padding: 2rem 2rem; user-select: none; pointer-events: auto; opacity: 0.7; }
 .carousel-arrow:hover { color: var(--dark); opacity: 1; }
 .carousel-arrow.disabled { opacity: 0.2; cursor: not-allowed; pointer-events: none; }
@@ -94,8 +94,7 @@ svg.icon { width: 1.2em; height: 1.2em; stroke: currentColor; fill: none; stroke
   .home-nav { gap: 1.5rem; }
   .carousel-wrap { padding: 5rem 1rem 3rem; }
   .carousel-title { margin-bottom: 2rem; font-size: 0.65rem; }
-  .carousel-container { max-width: 100%; min-height: 60vh; overflow: visible; }
-  .carousel-nav { top: 40vh; }
+  .carousel-container { max-width: 100%; min-height: 60vh; overflow-x: hidden; overflow-y: visible; }
   .carousel-img { width: 100%; max-width: 95vw; }
   .carousel-img.portrait { max-width: 85vw; }
   .carousel-caption { width: 95vw; max-width: 100%; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
