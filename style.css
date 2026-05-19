@@ -96,14 +96,14 @@ svg.icon { width: 1.2em; height: 1.2em; stroke: currentColor; fill: none; stroke
   .home-nav { gap: 1.5rem; }
   .carousel-wrap { padding: 5rem 1rem 3rem; }
   .carousel-title { margin-bottom: 2rem; font-size: 0.65rem; }
-  .carousel-container { max-width: 100%; min-height: auto; }
+  .carousel-container { max-width: 100%; min-height: 50vh; }
   .swipe-hint { margin-top: 1rem; font-size: 0.55rem; }
   .carousel-img { width: 100%; max-width: 95vw; }
   .carousel-img.portrait { max-width: 85vw; }
-  .carousel-caption { width: 95vw; max-width: 100%; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
+  .carousel-caption { width: 95vw; max-width: 100%; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
   .carousel-caption.portrait { width: 85vw; max-width: 85vw; }
   .caption-text { font-size: 0.92rem; max-width: 100%; }
-  .caption-right { display: flex; align-items: flex-start; flex-direction: row; gap: 1rem; }
+  .caption-right { align-items: flex-start; flex-direction: row; gap: 1rem; }
   .carousel-arrow { padding: 2.5rem 1.8rem; font-size: 1.5rem; opacity: 0.95; }
   .thoughts-wrap { padding: 7rem 1.4rem 8rem; }
   .about-wrap { padding: 7rem 1.4rem 8rem; }
