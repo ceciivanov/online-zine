@@ -29,18 +29,6 @@ function carouselNav(section, direction) {
   
   const newIndex = carousels[section];
   
-  // Show/hide hint based on position
-  const hint = document.getElementById(`${section}-hint`);
-  if (hint) {
-    if (newIndex === 0) {
-      // Show hint when back on first photo
-      hint.classList.remove('hidden');
-    } else {
-      // Hide hint when navigating away from first photo
-      hint.classList.add('hidden');
-    }
-  }
-  
   // Only animate if we actually changed slides
   if (oldIndex !== newIndex) {
     const oldSlide = slides[oldIndex];
@@ -117,12 +105,6 @@ function show(id) {
     // Then activate the correct slide
     slides[currentIndex].classList.add('active');
     updateArrowStates(id, slides.length);
-    
-    // Show swipe hint when entering the section
-    const hint = document.getElementById(`${id}-hint`);
-    if (hint) {
-      hint.classList.remove('hidden');
-    }
   }
   
   // Force animation retrigger for all pages
