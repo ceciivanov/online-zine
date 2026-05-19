@@ -159,7 +159,7 @@ window.addEventListener('DOMContentLoaded', () => {
     } else {
       // Initialize arrow states for home page
       updateArrowStates('work', 7);
-      updateArrowStates('film', 7);
+      updateArrowStates('film', 9);
     }
   }, 50);
 });
