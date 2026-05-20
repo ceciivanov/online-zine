@@ -15,7 +15,7 @@ document.addEventListener('scroll', () => {
   lastScrollTop = currentScroll;
 }, false);
 
-let carousels = { work: 0, film: 0 };
+let carousels = { digital: 0, film: 0 };
 
 function carouselNav(section, direction) {
   const container = document.querySelector(`#${section} .carousel-container`);
@@ -87,12 +87,12 @@ function show(id) {
   const navLinks = document.querySelector('.nav-links');
   id === 'home' ? navLinks.classList.add('hidden') : navLinks.classList.remove('hidden');
   window.scrollTo(0, 0);
-  
+
   // Update URL hash
   window.location.hash = id === 'home' ? '' : id;
   
-  // Restore carousel position if returning to work/film
-  if (id === 'work' || id === 'film') {
+  // Restore carousel position if returning to digital/film
+  if (id === 'digital' || id === 'film') {
     const container = document.querySelector(`#${id} .carousel-container`);
     const slides = container.querySelectorAll('.carousel-slide');
     const currentIndex = carousels[id];
@@ -115,7 +115,7 @@ function show(id) {
       void wrap.offsetHeight;
       wrap.style.animation = '';
     }
-  } else if (id === 'work' || id === 'film') {
+  } else if (id === 'digital' || id === 'film') {
     const wrap = document.querySelector(`#${id} .carousel-wrap`);
     if (wrap) {
       wrap.style.animation = 'none';
@@ -131,16 +131,16 @@ window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.carousel-slide').forEach(slide => {
     slide.classList.remove('slide-out-left', 'slide-out-right', 'slide-in-left', 'slide-in-right');
   });
-  
+
   // Small delay to ensure CSS is fully loaded (helps with external browser quirks)
   setTimeout(() => {
     const hash = window.location.hash.slice(1);
-    const validPages = ['work', 'film', 'thoughts', 'about'];
+    const validPages = ['digital', 'film', 'thoughts', 'about'];
     if (hash && validPages.includes(hash)) {
       show(hash);
     } else {
       // Initialize arrow states for home page
-      updateArrowStates('work', 7);
+      updateArrowStates('digital', 7);
       updateArrowStates('film', 9);
     }
   }, 50);
@@ -179,7 +179,7 @@ function openLightbox(src, caption) {
 function buildLbPhotos() {
   const activePage = document.querySelector('.page.active').id;
   lbPhotos = [];
-  if (activePage === 'work' || activePage === 'film') {
+  if (activePage === 'digital' || activePage === 'film') {
     document.querySelectorAll(`#${activePage} .carousel-img`).forEach(img => {
       const parent = img.closest('.carousel-slide');
       const caption = parent.querySelector('.caption-text').textContent;
@@ -225,7 +225,7 @@ function closeLightbox(e) {
   
   // Sync carousel to the photo we were viewing in lightbox BEFORE closing
   const activePage = document.querySelector('.page.active').id;
-  if (activePage === 'work' || activePage === 'film') {
+  if (activePage === 'digital' || activePage === 'film') {
     carousels[activePage] = lbIndex;
     const container = document.querySelector(`#${activePage} .carousel-container`);
     const slides = container.querySelectorAll('.carousel-slide');
@@ -257,7 +257,7 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowRight') lbNav(1);
     if (e.key === 'ArrowLeft') lbNav(-1);
-  } else if (activePage === 'work' || activePage === 'film') {
+  } else if (activePage === 'digital' || activePage === 'film') {
     if (e.key === 'ArrowRight') carouselNav(activePage, 1);
     if (e.key === 'ArrowLeft') carouselNav(activePage, -1);
   }
@@ -290,7 +290,7 @@ document.addEventListener('touchmove', e => {
     return; // Multi-touch = zoom, allow it
   }
   
-  if (lightboxOpen || activePage === 'work' || activePage === 'film') {
+  if (lightboxOpen || activePage === 'digital' || activePage === 'film') {
     // Prevent default scroll when swiping horizontally
     const touchCurrentX = e.changedTouches[0].screenX;
     const touchCurrentY = e.changedTouches[0].screenY;
@@ -317,7 +317,7 @@ document.addEventListener('touchend', e => {
 
 function handleSwipe() {
   const lightboxOpen = document.getElementById('lightbox').classList.contains('open');
-  
+
   // Handle lightbox swipe
   if (lightboxOpen) {
     const diff = touchStartX - touchEndX;
@@ -330,11 +330,11 @@ function handleSwipe() {
     }
     return;
   }
-  
+
   // Handle carousel swipe
   const activePage = document.querySelector('.page.active').id;
-  if (activePage !== 'work' && activePage !== 'film') return;
-  
+  if (activePage !== 'digital' && activePage !== 'film') return;
+
   const diff = touchStartX - touchEndX;
   if (Math.abs(diff) > 50) {
     diff > 0 ? carouselNav(activePage, 1) : carouselNav(activePage, -1);
