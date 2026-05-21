@@ -22,11 +22,14 @@ function carouselNav(section, direction) {
   const slides = container.querySelectorAll('.carousel-slide');
   const total = slides.length;
   const oldIndex = carousels[section];
-  
+
   carousels[section] += direction;
   if (carousels[section] < 0) carousels[section] = 0;
   if (carousels[section] >= total) carousels[section] = total - 1;
-  
+
+  // Save carousel position to localStorage
+  localStorage.setItem(`carousel_${section}`, carousels[section]);
+
   const newIndex = carousels[section];
   
   // Only animate if we actually changed slides
@@ -132,18 +135,21 @@ window.addEventListener('DOMContentLoaded', () => {
     slide.classList.remove('slide-out-left', 'slide-out-right', 'slide-in-left', 'slide-in-right');
   });
 
-  // Small delay to ensure CSS is fully loaded (helps with external browser quirks)
-  setTimeout(() => {
-    const hash = window.location.hash.slice(1);
-    const validPages = ['digital', 'film', 'thoughts', 'about'];
-    if (hash && validPages.includes(hash)) {
-      show(hash);
-    } else {
-      // Initialize arrow states for home page
-      updateArrowStates('digital', 7);
-      updateArrowStates('film', 9);
-    }
-  }, 50);
+  // Restore carousel positions from localStorage
+  const savedDigitalPos = localStorage.getItem('carousel_digital');
+  const savedFilmPos = localStorage.getItem('carousel_film');
+  if (savedDigitalPos !== null) carousels.digital = parseInt(savedDigitalPos);
+  if (savedFilmPos !== null) carousels.film = parseInt(savedFilmPos);
+
+  const hash = window.location.hash.slice(1);
+  const validPages = ['digital', 'film', 'thoughts', 'about'];
+  if (hash && validPages.includes(hash)) {
+    show(hash);
+  } else {
+    // Initialize arrow states for home page
+    updateArrowStates('digital', 7);
+    updateArrowStates('film', 9);
+  }
 });
 
 let lbPhotos = [];
