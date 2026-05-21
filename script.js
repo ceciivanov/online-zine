@@ -27,8 +27,8 @@ function carouselNav(section, direction) {
   if (carousels[section] < 0) carousels[section] = 0;
   if (carousels[section] >= total) carousels[section] = total - 1;
 
-  // Save carousel position to localStorage
-  localStorage.setItem(`carousel_${section}`, carousels[section]);
+  // Save carousel position to sessionStorage (cleared when browser closes)
+  sessionStorage.setItem(`carousel_${section}`, carousels[section]);
 
   const newIndex = carousels[section];
   
@@ -135,9 +135,9 @@ window.addEventListener('DOMContentLoaded', () => {
     slide.classList.remove('slide-out-left', 'slide-out-right', 'slide-in-left', 'slide-in-right');
   });
 
-  // Restore carousel positions from localStorage
-  const savedDigitalPos = localStorage.getItem('carousel_digital');
-  const savedFilmPos = localStorage.getItem('carousel_film');
+  // Restore carousel positions from sessionStorage (only within current browser session)
+  const savedDigitalPos = sessionStorage.getItem('carousel_digital');
+  const savedFilmPos = sessionStorage.getItem('carousel_film');
   if (savedDigitalPos !== null) carousels.digital = parseInt(savedDigitalPos);
   if (savedFilmPos !== null) carousels.film = parseInt(savedFilmPos);
 
